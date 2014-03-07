@@ -4,11 +4,6 @@ public class InGameMenu : MonoBehaviour
 {
 	public bool Paused = false;
 	
-	void Awake()
-	{
-		Level.HighestLevel = PlayerPrefs.GetInt("Highest Level", SceneListReader.FirstLevel);
-	}
-	
 	void OnGUI()
 	{
 		GUI.skin.label.alignment = TextAnchor.MiddleCenter;
@@ -52,11 +47,11 @@ public class InGameMenu : MonoBehaviour
 		
 		if (Paused)
 		{
-			for (int Lvl = 0; Lvl < SceneListReader.LevelList.Length; Lvl++)
+            for (int Lvl = 0; Lvl < SceneListReader.LevelList.Length; Lvl++)
 			{
 				string LevelName = SceneListReader.LevelList[Lvl];
 				
-				if (Lvl > Level.HighestLevel)
+				if (Lvl > Level.HighestLevel - SceneListReader.FirstLevel)
 				{
 					GUI.color = Color.grey;
 					

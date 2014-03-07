@@ -10,12 +10,11 @@ public class MainMenu : MonoBehaviour
 	
 	void Awake()
 	{
+        SceneListReader.Initialise();
+
+        Level.HighestLevel = PlayerPrefs.GetInt("Highest Level", SceneListReader.FirstLevel);
+
 		LastLevel = PlayerPrefs.GetInt("Last Played Level", -1);
-		
-		SceneListReader.Initialise();
-		
-		if (Debug.isDebugBuild)
-			Level.HighestLevel = SceneListReader.LastLevel;
 	}
 	
 	void OnGUI()
@@ -69,7 +68,7 @@ public class MainMenu : MonoBehaviour
 		{
 			string LevelName = SceneListReader.LevelList[Lvl];
 			
-			if (Lvl > Level.HighestLevel)
+			if (Lvl > Level.HighestLevel - SceneListReader.FirstLevel)
 			{
 				GUI.color = Color.grey;
 			
@@ -81,6 +80,8 @@ public class MainMenu : MonoBehaviour
 				return;
 			}
 		}
+
+        GUI.color = Color.white;
 		
 		if (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.85f, Screen.width * 0.2f, Screen.height * 0.1f), "Main Menu"))
 			LevelSelect = false;

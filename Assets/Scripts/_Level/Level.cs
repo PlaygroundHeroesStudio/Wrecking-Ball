@@ -103,7 +103,7 @@ public class Level : MonoBehaviour
 		if (!Win)
 		{
 			Win = true;
-			
+
 			if (Application.loadedLevel + 1 > HighestLevel)
 			{
 				HighestLevel = Application.loadedLevel + 1;
